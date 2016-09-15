@@ -7,14 +7,14 @@ typedef struct{
 	int fila;
 	int columna;
 	int dificultad;
+	Position* posiciones_ocupadas;
 
 
 }Board;
 
-
 //Game:
 typedef struct{
-
+	Board board;
 
 }Game;
 
@@ -34,10 +34,7 @@ typedef struct{
 //Position
 typedef struct{
 	int fila;
-	int columna;
-	Ship ship;
-
-
+	int columna; 
 }Position;
 
 
