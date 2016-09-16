@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <direct.h>
 
 
 int main(){
@@ -13,6 +14,11 @@ int main(){
 
 
 	}
-
+	sleep(2);
+	system("color fd");
+	sleep(2);
+	system("cls");
+	sleep(2);
+	system("color fd");
 	return 0;
 }
