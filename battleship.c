@@ -36,4 +36,6 @@ int main(){
 	
 	return 0;
 }
+
+//https://github.com/micodigo/Principiante-N1/blob/master/Programas/batalla%20nabal.cpp
 //yapo yapo yapooo 
