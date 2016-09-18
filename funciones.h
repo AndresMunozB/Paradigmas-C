@@ -1,8 +1,12 @@
 #include "constantes.h"
-#include "structuras.h"
+#include "estructuras.h"
 
 #ifndef _FUNCIONES_H
 #define _FUNCIONES_H
+
+
+//creadas por mi;
+//Params* crearParams(int lancha, int submarino,int crucero,int destructor,int portaviones);
 
 
 //minimas pedidas:
@@ -21,4 +25,12 @@ void saveGameHistory(int id,code* statusCode);
 Game* loadGameHistory(int id,code* statusCode);
 int getScore(Game* game);
 
+
+
+
+void imprimir(char **p);
+char** inicio();
+
+
 #endif
+//mamorcito te quiero muuuuuuuuuucho 
