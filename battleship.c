@@ -17,8 +17,35 @@ int main(){
 		printf("7) Visualizar tablero\n");
 		scanf("%d",&menu);
 	}
-	
-	Ship** hola = (Ship**) malloc(sizeof(Ship*)*3);
+	code* statusCode;
+	Params* params= (Params*)crearParams(1);
+	Board* board= (Board*) createBoard(24,10,*params,statusCode);
+	Position* position=(Position*) crearPosition(12,3);
+	Ship* ship= (Ship*) crearShip('L');
+	putShip(board,*position,*ship,statusCode);
+
+	printf("0    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 101 102\n");
+	printf("1    P - - - - - - - - -  -  -  -  -  -   P   - \n");
+	printf("2                                               \n");
+	printf("3                                               \n");
+	printf("4                                               \n");
+	printf("5                                               \n");
+	printf("6                                               \n");
+	printf("7                                               \n");
+	printf("8                                               \n");
+	printf("9                                               \n");
+	printf("10  P                                           \n");
+	printf("11                                              \n");
+	printf("12                                              \n");
+	printf("13                                              \n");
+	printf("14                                              \n");
+	printf("15                                              \n");
+	printf("100 P                                           \n");
+
+
+	//char** p=inicio();
+	//imprimir(p);
+	/*Ship** hola = (Ship**) malloc(sizeof(Ship*)*3);
 	hola[0] = (Ship*)crearShip('P');
 	imprimirShip(hola[0]);
 	printf("\n");
@@ -32,7 +59,7 @@ int main(){
 
 	printf("\n");
 	Params* params=(Params*) crearParams(5);
-	imprimirParams(params);
+	imprimirParams(params);*/
 	
 	return 0;
 }

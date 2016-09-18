@@ -7,11 +7,11 @@
 
 
 //utilidades:
-int random(int valor1,int valor2){
+int intrandom(int desde,int hasta){
 	int random;
-	valor2+=1;
-	while (!(random>=valor1 && random<=valor2)){
-		random = rand()% valor2;
+	hasta+=1;
+	while (!(random>=desde && random<=hasta)){
+		random = rand()% hasta;
 	}	
 	return random;
 }
@@ -141,7 +141,7 @@ Board* inicializarBoard(int n,int m, Params params,code *statusCode){
 		return NULL;
 	}
 	//printf("entreeee\n");
-	Board* board= malloc(sizeof(Board)); //verificando si hay memoria para el board
+	Board* board=(Board*) malloc(sizeof(Board)); //verificando si hay memoria para el board
 	if (board==NULL){
 		return NULL;
 	}
@@ -149,6 +149,18 @@ Board* inicializarBoard(int n,int m, Params params,code *statusCode){
 	else{
 		board->fila=n;
 		board->columna=m;
+		board->params=params;
+		board->largo_info_cpu=0;
+		board->largo_info_player=0;
+		board->arreglo_info_cpu=(Info**)malloc(sizeof(Info*)*params.cuadros_ship);
+		if ((board->arreglo_info_cpu)==NULL){
+			return NULL;
+		}
+		board->arreglo_info_player=(Info**)malloc(sizeof(Info*)*(params.cuadros_ship+1));
+		if ((board->arreglo_info_player)==NULL){
+			return NULL;
+		}
+		return board;
 
 		//board->
 		
@@ -204,20 +216,29 @@ int play(Board* board,Ship* ship, Position* pArray, code* statusCode){
 }*/
 
 void putShip(Board* board,Position position,Ship ship,code* statusCode){
-	
+	if ((position.fila)<=(board->fila/2)){
+		printf("estoy arriiivaaa\n");
+	}
+	else {
+		printf("holaa123123\n");
+	}
 
 } //ver lo de la posision y de el ship
 void print(Board* board,int showComplete,code* statusCode);
+	char**
 
 
 void imprimir(char **p){
 	int i,j;
-	for(i=0;i<10;i++)p[0][i]='0'+i;
-	for(i=0;i<10;i++)p[i][0]='0'+i;
+	int x,y;
+	x=10;
+	y=20;
+	for(i=0;i<y;i++)p[0][i]='0'+i;
+	for(i=0;i<x;i++)p[i][0]='0'+i;
 	p[1][3]='P';
-	for(i=0;i<10;i++){
+	for(i=0;i<x;i++){
 		printf("\n\t\t\t\t");
-		for(j=0;j<10;j++)
+		for(j=0;j<y;j++)
 			printf(" %c",p[i][j]);
 	}
 }
@@ -225,14 +246,16 @@ void imprimir(char **p){
 char** inicio(){
 	char **p=NULL;
 	int i,j;
-	
-	p=(char**)malloc(10*sizeof(char*));
-	for(i=0;i<=10;i++)
-		p[i]=(char*)malloc(10*sizeof(char));
+	int x,y;
+	x=10;
+	y=20;
+	p=(char**)malloc(x*sizeof(char*));
+	for(i=0;i<=x;i++)
+		p[i]=(char*)malloc(y*sizeof(char));
 		
-	for(j=0;j<=10;j++)
-		for(i=0;i<=10;i++)
-			p[j][i]='~';	
+	for(i=0;i<=x;i++)
+		for(j=0;j<=y;j++)
+			p[i][j]='~';	
 			
 	return p;
 }

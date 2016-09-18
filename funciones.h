@@ -8,6 +8,24 @@
 //creadas por mi;
 //Params* crearParams(int lancha, int submarino,int crucero,int destructor,int portaviones);
 
+//Mias:
+int intrandom(int desde,int hasta);
+void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones);
+Params* crearParams(int dificultad);
+void imprimirParams(Params* params);
+void liberarParams(Params* params);
+Position* crearPosition(int fila,int columna);
+void imprimirPosition(Position* position);
+void liberarPosition(Position* position);
+void cargarShip(Ship* ship,char tipo,int vida, int orientacion, int habilidad);
+Ship* crearShip(char tipo);
+void imprimirShip(Ship* ship);
+void liberarShip(Ship* ship);
+Board* inicializarBoard(int n,int m, Params params,code *statusCode);
+void liberarBoard(Board* board);
+Info* crearInfo(Position* position,Ship* ship);
+void imprimirInfo(Info* info);
+
 
 //minimas pedidas:
 Board* createBoard(int n,int m, Params params,code *statusCode); 

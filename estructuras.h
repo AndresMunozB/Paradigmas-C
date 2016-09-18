@@ -24,54 +24,11 @@ typedef struct{
 }Ship;
 
 typedef struct{
+	int largo;
 	Position* position;
 	Ship* ship;
 }Info;
 
-
-
-
-//Board:
-typedef struct{
-	/*dimenciones de nxm donde n debe ser par!! 
-	dificultad :
-
-	*/
-	int fila;
-	int columna;
-	int dificultad;
-	//Params paramsCPU;
-	//Params paramsPlayer;
-	/*int cantidadShip;
-	Ship** ships;*/
-	int largo_arreglo_ship_player_1;
-	Ship* arreglo_ship_player_1;
-
-	int largo_arreglo_ship_player_2;
-	Ship* arreglo_ship_player_2;
-
-
-	int largo_arreglo_info_player_1;
-	Info* arreglo_info_player_1;
-
-	int largo_arreglo_info_player_2;
-	Info* arreglo_info_player_2;
-	
-
-}Board;
-
-
-//Game:
-typedef struct{
-
-	Board board;
-	Position** posiciones_atacadas_jugador;
-	Position** posiciones_atacadas_cpu;
-
-}Game;
-
-
-//Params:
 typedef struct{
 	/*cantidad de cada tipo de barco en solo una mitad
 	calamares gigantes, tormentas, etc
@@ -88,6 +45,44 @@ typedef struct{
 	//Ship*
 
 }Params;
+
+
+//Board:
+typedef struct{
+	/*dimenciones de nxm donde n debe ser par!! 
+	dificultad :
+
+	*/
+	int fila;
+	int columna;
+	int dificultad;
+	Params params;
+	//Params paramsPlayer;
+	/*int cantidadShip;
+	Ship** ships;*/
+
+	int largo_info_cpu;
+	Info** arreglo_info_cpu;
+
+	int largo_info_player;
+	Info** arreglo_info_player;
+	
+
+}Board;
+
+
+//Game:
+typedef struct{
+
+	Board board;
+	Position** posiciones_atacadas_jugador;
+	Position** posiciones_atacadas_cpu;
+
+}Game;
+
+
+//Params:
+
 
 
 #endif
