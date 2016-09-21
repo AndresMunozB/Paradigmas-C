@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "estructuras.h"
 #include "funciones.h"
+#include <string.h>
+
 
 int main(){
 	
@@ -17,52 +19,40 @@ int main(){
 		printf("7) Visualizar tablero\n");
 		scanf("%d",&menu);
 	}
-	code* statusCode;
-	Params* params= (Params*)crearParams(1);
-	Board* board= (Board*) createBoard(24,10,*params,statusCode);
-	Position* position=(Position*) crearPosition(12,3);
-	Ship* ship= (Ship*) crearShip('L');
-	putShip(board,*position,*ship,statusCode);
-
-	printf("0    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 101 102\n");
-	printf("1    P - - - - - - - - -  -  -  -  -  -   P   - \n");
-	printf("2                                               \n");
-	printf("3                                               \n");
-	printf("4                                               \n");
-	printf("5                                               \n");
-	printf("6                                               \n");
-	printf("7                                               \n");
-	printf("8                                               \n");
-	printf("9                                               \n");
-	printf("10  P                                           \n");
-	printf("11                                              \n");
-	printf("12                                              \n");
-	printf("13                                              \n");
-	printf("14                                              \n");
-	printf("15                                              \n");
-	printf("100 P                                           \n");
+	int* id=(int*)malloc(sizeof(int));
+	*id=0;
 
 
-	//char** p=inicio();
-	//imprimir(p);
-	/*Ship** hola = (Ship**) malloc(sizeof(Ship*)*3);
-	hola[0] = (Ship*)crearShip('P');
-	imprimirShip(hola[0]);
-	printf("\n");
-	Position* position=(Position*)crearPosition(2,4);
-	Ship* ship= (Ship*) crearShip('S');
-	Info* info=(Info*)crearInfo(position,ship);
-	imprimirInfo(info);
-	ship->vida-=1;
-	printf("\n");
-	imprimirInfo(info);
+	
 
-	printf("\n");
-	Params* params=(Params*) crearParams(5);
-	imprimirParams(params);*/
+
+	printf("id: %d \n",*id );
+	Position position;
+	cargarPosition(&position,1,2);
+
+
+	Ship* arreglo=(Ship*)crearArregloShip(5);
+	cargarShip(&arreglo[1],'S',id);
+	imprimirShip(arreglo[1]);
+	cargarShip(&arreglo[2],'P',id);
+	
+	putPositionShip(&arreglo[2],1,4,1);
+	imprimirShip(arreglo[2]);
+	//memcpy(&arreglo[1].posiciones[1],&position,sizeof(Position));
+	printf("hola!\n");
+	putPositionShip(&arreglo[1],3,3,0);
+	imprimirShip(arreglo[1]);
+	printf("hola!11\n");
+	printf("%d\n",compararPosition(position,arreglo[1].posiciones[0]) );
+	printf("%d\n",sobreponeShip(arreglo[1],arreglo[2]) );
+	//imprimirShip(arreglo[1]);
+	//cargarShip
+
 	
 	return 0;
 }
+
+
 
 //https://github.com/micodigo/Principiante-N1/blob/master/Programas/batalla%20nabal.cpp
 //yapo yapo yapooo 
