@@ -23,38 +23,30 @@ int main(){
 	*id=0;
 
 
-	
+	code* statusCode;
 
 
 	printf("id: %d \n",*id );
-	Position position;
-	cargarPosition(&position,1,2);
 	Params params;
-	cargarParams(&params,1,2,3,4,2,id);
+	printf("hola antes params\n");
+	cargarParams(&params,1,3,0,0,0,id);
 	printf("inicio print params\n");
-	int i;
+	/*int i;
 	for (i=0;i<params.cantidad_ship;i++){
 		imprimirShip(params.arreglo_ship_cpu[i]);
-	}
+	}*/
 	printf("fin print params\n");
-
-	Ship* arreglo=(Ship*)crearArregloShip(5);
-	cargarShip(&arreglo[1],'S',id);
-	imprimirShip(arreglo[1]);
-	cargarShip(&arreglo[2],'P',id);
-	
-	putPositionShip(&arreglo[2],1,4,1);
-	imprimirShip(arreglo[2]);
-	//memcpy(&arreglo[1].posiciones[1],&position,sizeof(Position));
-	printf("hola!\n");
-	putPositionShip(&arreglo[1],3,3,0);
-	imprimirShip(arreglo[1]);
+	Board* board=(Board*)createBoard(20,20,params,statusCode);
+	board->matriz[3][4]='L';
+	board->matriz[3][5]='L';
+	Board2*
+	print(board,0,statusCode);
+	//*****memcpy(&arreglo[1].posiciones[1],&position,sizeof(Position));
 	printf("hola!11\n");
-	printf("%d\n",compararPosition(position,arreglo[1].posiciones[0]) );
-	printf("%d\n",sobreponeShip(arreglo[1],arreglo[2]) );
-	//imprimirShip(arreglo[1]);
-	//cargarShip
-
+	printf("comparar posiciones: %d\n",compararPosition(params.arreglo_ship_cpu[0].posiciones[0],
+														params.arreglo_ship_cpu[0].posiciones[0]	 ));
+	printf("sbreposicion de ship: %d\n",sobreponeShip(params.arreglo_ship_cpu[0],params.arreglo_ship_cpu[0] ));
+	
 	
 	return 0;
 }

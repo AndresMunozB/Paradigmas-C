@@ -170,43 +170,44 @@ void  cargarParams(Params* params,int lancha, int submarino,int crucero,int dest
 	params->cuadros_minimos = (lancha*2)+(submarino*4)+(crucero*9)+(destructor*16)+(portaviones*25);
 	params->cuadros_ship=(lancha*1)+(submarino*2)+(crucero*3)+(destructor*4)+(portaviones*5);
 	params->cantidad_ship=lancha+submarino+crucero+destructor+portaviones;
-	params->arreglo_ship_cpu==(Ship*)malloc(sizeof(Ship)*(params->cantidad_ship));
+	printf("antes pedir memoria\n");
+	params->arreglo_ship_cpu=(Ship*)crearArregloShip(params->cantidad_ship);
 	int i,posicion;
 	posicion=0;
 	i=0;
 	while(i<lancha){
-		cargarShip(&params->arreglo_ship_cpu[i],'L',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'L',id);
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<submarino){
-		cargarShip(&params->arreglo_ship_cpu[i],'S',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'S',id);
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<crucero){
-		cargarShip(&params->arreglo_ship_cpu[i],'C',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'C',id);
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<destructor){
-		cargarShip(&params->arreglo_ship_cpu[i],'D',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'D',id);
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<portaviones){
-		cargarShip(&params->arreglo_ship_cpu[i],'P',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'P',id);
 		i++;
 		posicion++;
 	}
 	
-	for (i=0;i<params->cantidad_ship;i++){
+	/*for (i=0;i<params->cantidad_ship;i++){
 		imprimirShip(params->arreglo_ship_cpu[i]);
-	}
+	}*/
 
 
 
@@ -226,6 +227,18 @@ void imprimirParams(Params params){
 
 
 Board* inicializarBoard(int n,int m, Params params,code *statusCode){
+	
+}
+void liberarBoard(Board* board){
+
+	free(board);
+	printf("liberarBoar: OK\n");
+}
+
+
+//fin de mis funciones..
+
+Board* createBoard(int n,int m, Params params,code *statusCode){
 	if ((n%2)!=0){ //verificando que el numero de filas es un numero par:
 		//printf("n no es par\n");		
 		return NULL;
@@ -245,10 +258,23 @@ Board* inicializarBoard(int n,int m, Params params,code *statusCode){
 	}
 
 	else{
+		printf("entreee\n");
 		board->fila=n;
 		board->columna=m;
 		board->params=params;
-
+		imprimirShip(board->params.arreglo_ship_cpu[3]);
+		//printf("imprimir un ship dentro de inicialziar board\n");
+		board->matriz=(char**)malloc(sizeof(char*)*n);//filas
+		int i,j;
+		for (i=0;i<n;i++){
+			board->matriz[i]=(char*)malloc(sizeof(char)*m); //columnas
+		}
+		
+		for (i=0;i<board->fila;i++){
+			for (j=0;j<board->columna;j++){
+				board->matriz[i][j]='/';
+			}
+		}
 
 
 		printf("termino inicializar board\n");
@@ -257,21 +283,6 @@ Board* inicializarBoard(int n,int m, Params params,code *statusCode){
 		//board->
 		
 	}
-}
-void liberarBoard(Board* board){
-
-	free(board);
-	printf("liberarBoar: OK\n");
-}
-
-
-//fin de mis funciones..
-
-Board* createBoard(int n,int m, Params params,code *statusCode){
-	Board* board= inicializarBoard(n,m,params,statusCode);
-
-
-	return board;
 
 	
 } 
@@ -287,8 +298,30 @@ int play(Board* board,Ship* ship, Position* pArray, code* statusCode){
 
 void putShip(Board* board,Position position,Ship ship,code* statusCode){
 	printf("funciones putship para el board\n");
+	
+
 
 }
+
 void print(Board* board,int showComplete,code* statusCode){
-	printf("funciones print para el board\n");
+	//printf("funciones print para el board\n");
+	int i,j;
+		
+	for (i=0;i<board->fila;i++){
+		if(i==board->fila/2){
+			int k;
+			for(k=0;k<board->columna;k++){
+				printf("-");
+			}
+			printf("\n");
+		}
+		
+		for(j=0;j<board->columna;j++){
+			//board->matriz[i][j]='s';
+			printf("%c",board->matriz[i][j] );
+		}
+
+		printf("\n");
+	}
+
 }
