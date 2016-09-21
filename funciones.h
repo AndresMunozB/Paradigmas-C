@@ -9,6 +9,20 @@
 //Params* crearParams(int lancha, int submarino,int crucero,int destructor,int portaviones);
 
 //Mias:
+int intrandom(int desde,int hasta);
+void cargarPosition(Position* position,int fila,int columna);
+void imprimirPosition(Position position);
+int compararPosition(Position position1,Position position2);
+void inicialiarArregloPosiciones(Position* posiciones);
+void putPositionShip(Ship* ship,int fila, int columna, int orientacion);
+int sobreponeShip(Ship ship1, Ship ship2);
+void cargarShip(Ship* ship,char tipo,int* id);
+void imprimirShip(Ship ship);
+Ship* crearArregloShip(int cantidad_ship);
+void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones);
+void imprimirParams(Params params);
+Board* inicializarBoard(int n,int m, Params params,code *statusCode);
+void liberarBoard(Board* board);
 
 
 
