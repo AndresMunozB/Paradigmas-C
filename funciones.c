@@ -53,12 +53,16 @@ void putPositionShip(Ship* ship,int fila, int columna, int orientacion){
 }
 int sobreponeShip(Ship ship1, Ship ship2){
 	int i,j;
+	//printf("%d \n",ship1.tamano );
+	//printf("%d \n",ship2.tamano );
 	for (i=0;i<ship1.tamano;i++){
-		printf("sobrepone for i\n");
-		printf("%d \n",ship2.tamano );
+		//printf("sobrepone for i\n");
+		//printf("%d \n",ship2.tamano );
 		for(j=0;j<ship2.tamano;j++){
-			printf("sobrepone for j\n");
+			//printf("sobrepone for j\n");
 			if(compararPosition(ship1.posiciones[i],ship2.posiciones[j])){
+				//imprimirPosition(ship1.posiciones[i]);
+				//imprimirPosition(ship2.posiciones[j]);
 				return 1;
 			}
 		}
@@ -121,16 +125,88 @@ void imprimirShip(Ship ship){
 
 Ship* crearArregloShip(int cantidad_ship){
 	Ship* arreglo=(Ship*)malloc(sizeof(Ship)*(cantidad_ship));
-	int i,posicion;
+	//int i,posicion;
 	return arreglo;
+}
+void cargarArregloShip(Ship* arreglo,int lancha, int submarino,int crucero,int destructor,int portaviones, int* id){
+	int i,posicion;
+	posicion=0;
+	i=0;
+	while(i<lancha){
+		cargarShip(&arreglo[i],'L',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<submarino){
+		cargarShip(&arreglo[i],'S',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<crucero){
+		cargarShip(&arreglo[i],'C',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<destructor){
+		cargarShip(&arreglo[i],'D',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<portaviones){
+		cargarShip(&arreglo[i],'P',id);
+		i++;
+		posicion++;
+	}
+
 }
 
 //mias!!:
-void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones){
+void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones,int* id){
 	
 	params->cuadros_minimos = (lancha*2)+(submarino*4)+(crucero*9)+(destructor*16)+(portaviones*25);
 	params->cuadros_ship=(lancha*1)+(submarino*2)+(crucero*3)+(destructor*4)+(portaviones*5);
 	params->cantidad_ship=lancha+submarino+crucero+destructor+portaviones;
+	params->arreglo_ship_cpu==(Ship*)malloc(sizeof(Ship)*(params->cantidad_ship));
+	int i,posicion;
+	posicion=0;
+	i=0;
+	while(i<lancha){
+		cargarShip(&params->arreglo_ship_cpu[i],'L',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<submarino){
+		cargarShip(&params->arreglo_ship_cpu[i],'S',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<crucero){
+		cargarShip(&params->arreglo_ship_cpu[i],'C',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<destructor){
+		cargarShip(&params->arreglo_ship_cpu[i],'D',id);
+		i++;
+		posicion++;
+	}
+	i=0;
+	while(i<portaviones){
+		cargarShip(&params->arreglo_ship_cpu[i],'P',id);
+		i++;
+		posicion++;
+	}
+	
+	for (i=0;i<params->cantidad_ship;i++){
+		imprimirShip(params->arreglo_ship_cpu[i]);
+	}
 
 
 

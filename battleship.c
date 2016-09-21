@@ -29,7 +29,14 @@ int main(){
 	printf("id: %d \n",*id );
 	Position position;
 	cargarPosition(&position,1,2);
-
+	Params params;
+	cargarParams(&params,1,2,3,4,2,id);
+	printf("inicio print params\n");
+	int i;
+	for (i=0;i<params.cantidad_ship;i++){
+		imprimirShip(params.arreglo_ship_cpu[i]);
+	}
+	printf("fin print params\n");
 
 	Ship* arreglo=(Ship*)crearArregloShip(5);
 	cargarShip(&arreglo[1],'S',id);

@@ -19,7 +19,7 @@ int sobreponeShip(Ship ship1, Ship ship2);
 void cargarShip(Ship* ship,char tipo,int* id);
 void imprimirShip(Ship ship);
 Ship* crearArregloShip(int cantidad_ship);
-void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones);
+void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones,int* id);
 void imprimirParams(Params params);
 Board* inicializarBoard(int n,int m, Params params,code *statusCode);
 void liberarBoard(Board* board);
