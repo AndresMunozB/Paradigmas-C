@@ -5,7 +5,6 @@
 #include "funciones.h"
 #include <time.h>
 #include <string.h>
-#include <conio.h>
 
 
 int intRandom(int desde,int hasta){

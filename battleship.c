@@ -68,7 +68,7 @@ int main(){
 			board=(Board*)createBoard(fila,columna,params,statusCode);
 			printf("\n");
 			print(board,1,statusCode);
-			system("pause");
+			//system("pause");
 		}
 		else if(menu==2){
 			saveBoard(board,&id,statusCode);
@@ -79,9 +79,9 @@ int main(){
 			int idBoard;
 			printf("Ingrese el id del tablero: ");
 			scanf("%d",&idBoard);
-
+			printf("hola\n");
 			board=loadBoard(idBoard,statusCode);
-
+			printf("hola\n");
 
 		}
 		else if(menu==4){
@@ -238,7 +238,7 @@ int main(){
 
 				//print(board,0,statusCode);
 
-				system("pause");
+				//system("pause");
 			}
 			else{
 				printf("Tiene que ingresar un tablero primero\n");
@@ -257,7 +257,7 @@ int main(){
 			else if(opcion==2){
 				print(board,1,statusCode);
 			}
-			system("pause");
+			//system("pause");
 		}
 	}
 	//imprimirShip(board->params.arreglo_ship_cpu[0]);	
@@ -271,10 +271,10 @@ int main(){
 	//print(board,0,statusCode);
 	
 	//print(board,1,statusCode);
-	if (board!=NULL){
+	/*if (board!=NULL){
 		liberarBoard(board);
 		liberarParams(&params);
-	}
+	}*/
 	
 
 
