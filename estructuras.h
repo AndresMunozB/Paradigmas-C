@@ -30,10 +30,17 @@ typedef struct{
 	/*cantidad de cada tipo de barco en solo una mitad
 	calamares gigantes, tormentas, etc
 	*/
+
 	int cuadros_minimos;
 	int cuadros_ship; 
 	int cantidad_ship;
+	int largo_arreglo_player;
+	int cuadros_por_ocupar;
 	Ship* arreglo_ship_cpu;
+	Ship* arreglo_ship_player;
+	
+	
+
 	//Ship*
 
 }Params;
@@ -42,16 +49,14 @@ typedef struct{
 //Board:
 typedef struct{
 	/*dimenciones de nxm donde n debe ser par!! 
-	dificultad :
-
-	*/
+	dificultad :*/
 	int fila;
 	int columna;
 	int dificultad;
 	Params params;
-	char** matriz;
+	char** matriz0;
+	char** matriz1;
 
-	
 
 }Board;
 
@@ -65,8 +70,21 @@ typedef struct{
 
 }Game;
 
+//Para save y load un board:
 
-//Params:
+/*typedef struct 
+{
+	char tipo;
+	char orientacion;
+	char tipo;
+	char fila[6];
+	char columna[6];
+
+	
+
+}ShipTxt;*/
+
+
 
 
 
