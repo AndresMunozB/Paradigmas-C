@@ -16,7 +16,6 @@ typedef struct{
 	  resistencia
 	  blindaje
 	  tamaño de la embarcacion (cuantos cuadritos ocupa)*/
-	  int id;
 	  char tipo; //lancha, submarino, crucero , destructor, portaviones; L,S,C,D,P
 	  int vida; // 1, 2, 3, 4, 5. esto ademas nos sirve para saber cuanto espacio ocupa en el tablero.
 	  int orientacion; /// 0 o 1 ; vertical y horizontal.
@@ -56,6 +55,7 @@ typedef struct{
 	Params params;
 	char** matriz0;
 	char** matriz1;
+	int actualPlayer;
 
 
 }Board;
@@ -72,17 +72,37 @@ typedef struct{
 
 //Para save y load un board:
 
-/*typedef struct 
+typedef struct 
 {
+	char tipoReg[2];
+	char f1;
+	char fila[4];
+	char f2;
+	char columna[4];
+	char f3;
+	char cantidad_ship[3];
+	char f4;
+	char cuadros_ship[4];
+	char f5;
+	char cuadros_minimos[5];
+
+}RegDimension;
+
+typedef struct 
+{
+	char tipoReg[2];
+	char f1;
 	char tipo;
+	char f2;
 	char orientacion;
-	char tipo;
-	char fila[6];
-	char columna[6];
+	char f3;
+	char fila[4];
+	char f4;
+	char columna[4];
 
-	
+}RegShip;
 
-}ShipTxt;*/
+
 
 
 

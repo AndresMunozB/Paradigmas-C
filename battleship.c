@@ -10,8 +10,8 @@ int main(){
 
 
 	imprimirTitulo();
-	int* id=(int*)malloc(sizeof(int));
-	*id=0;
+	int id;
+	id=0;
 	code* statusCode;
 	Params params;
 	Board* board=NULL;
@@ -64,7 +64,7 @@ int main(){
 				}
 			}while(cuadros_minimos>((fila/2)*columna));
 
-			cargarParams(&params,l,s,c,d,p,id);
+			cargarParams(&params,l,s,c,d,p);
 			board=(Board*)createBoard(fila,columna,params,statusCode);
 			printf("\n");
 			print(board,1,statusCode);
@@ -81,11 +81,20 @@ int main(){
 			if (checkBoard(board,statusCode)){
 				printf("El tablero esta bien\n");
 			}
-			else{
-			}
 
 		}
 		else if(menu==5){
+			int fila,columna;
+			do{
+				printf("Ingrese la posicion a atacar\n");
+			}while(0);
+			Position position;
+			cargarPosition(&position,3,2);
+
+
+			printf("hola2\n");
+			play(board,&board->params.arreglo_ship_cpu[0],&position,statusCode);
+			printf("hola\n");
 
 		}
 		else if(menu==6){
@@ -186,7 +195,7 @@ int main(){
 					//printf("tipo: %c\n",tipo );
 					//printf("orientacion: %d\n",orientacion);
 					position.fila+=(board->fila/2);
-					cargarShip(&ship,tipo,id);
+					cargarShip(&ship,tipo);
 					putPositionToShip(&ship,position.fila,position.columna,orientacion);
 					if(verificarArregloPositionShipPlayer(board->params.arreglo_ship_player,board->params.largo_arreglo_player,ship)){
 							printf("No se pudo ubicar el barco debido a que ya existe un barco en esa posicion\n");
@@ -230,22 +239,35 @@ int main(){
 		else if (menu==7){
 			int opcion;
 			printf("Mostrar los barcos enemigos?...\n");
-			printf("1) No\n");
-			printf("2) Si\n");
+			printf("0) No\n");
+			printf("1) Si\n");
 			printf("Opcion: ");
 			scanf("%d",&opcion);
-			if(opcion==1){
+			if(opcion==0){
 				print(board,0,statusCode);
 			}
-			else if(opcion==2){
+			else if(opcion==1){
 				print(board,1,statusCode);
 			}
 			system("pause");
 		}
 	}
-	//imprimirShip(board->params.arreglo_ship_cpu[0]);
-	liberarBoard(board);
-	liberarParams(&params);
+	//imprimirShip(board->params.arreglo_ship_cpu[0]);	
+	//printf("jugador: %d\n",board->actualPlayer );
+	//terminarTurno(board);
+	//printf("jugador: %d\n",board->actualPlayer );
+	print(board,1,statusCode);
+	saveBoard(board,&id,statusCode);
+
+	
+	//print(board,0,statusCode);
+	loadBoard(id,statusCode);
+	print(board,1,statusCode);
+	if (board!=NULL){
+		liberarBoard(board);
+		liberarParams(&params);
+	}
+	
 
 
 	//printf("id: %d \n",*id );
@@ -301,3 +323,8 @@ int main(){
 
 //https://github.com/micodigo/Principiante-N1/blob/master/Programas/batalla%20nabal.cpp
 //yapo yapo yapooo
+
+
+
+//void cargarShip(Ship* ship,char tipo){
+//void putPositionToShip(Ship* ship,int fila, int columna, int orientacion){

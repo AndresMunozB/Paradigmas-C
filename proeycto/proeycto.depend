@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1474589178 source:c:\users\andres\desktop\programacion\c\paradigmas\paradigmas-c\battleship.c
+1474608579 source:c:\users\andres\desktop\programacion\c\paradigmas\paradigmas-c\battleship.c
 	<stdio.h>
 	<stdlib.h>
 	"estructuras.h"
@@ -7,9 +7,9 @@
 	<string.h>
 	<time.h>
 
-1474583469 c:\users\andres\desktop\programacion\c\paradigmas\paradigmas-c\estructuras.h
+1474608580 c:\users\andres\desktop\programacion\c\paradigmas\paradigmas-c\estructuras.h
 
-1474583467 c:\users\andres\desktop\programacion\c\paradigmas\paradigmas-c\funciones.h
+1474608581 c:\users\andres\desktop\programacion\c\paradigmas\paradigmas-c\funciones.h
 	"constantes.h"
 	"estructuras.h"
 

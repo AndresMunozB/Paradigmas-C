@@ -4,6 +4,8 @@
 #include "constantes.h"
 #include "funciones.h"
 #include <time.h>
+#include <string.h>
+#include <conio.h>
 
 
 int intRandom(int desde,int hasta){
@@ -12,7 +14,7 @@ int intRandom(int desde,int hasta){
 	/*hasta+=1;
 	while (!(random>=desde && random<=hasta)){
 		random = rand()% hasta;
-	}	
+	}
 	return random;*/
 	random = rand () % (hasta-desde+1) + desde;
 	return random;
@@ -73,8 +75,7 @@ int sobreponeShip(Ship ship1, Ship ship2){ //si se sobrepone el barco retorna 1,
 	}
 	return 0;
 }
-void cargarShip(Ship* ship,char tipo,int* id){
-	ship->id=*id;
+void cargarShip(Ship* ship,char tipo){
 	ship->tipo=tipo;
 	inicialiarArregloPosiciones(ship->posiciones);
 
@@ -108,15 +109,13 @@ void cargarShip(Ship* ship,char tipo,int* id){
 		ship->habilidad=2;
 		ship->tamano=5;
 	}
-	
-	*id+=1;
-	
+
+
 }
 
 void imprimirShip(Ship ship){
-	printf("Id: %d\n",ship.id );
-	printf("tipo: %c\n", ship.tipo); 
-	printf("vida: %d\n", ship.vida); 
+	printf("tipo: %c\n", ship.tipo);
+	printf("vida: %d\n", ship.vida);
 	printf("orientacion: %d\n", ship.orientacion);
 	printf("habildiad: %d. \n", ship.habilidad);
 	printf("Posiciones:");
@@ -127,36 +126,36 @@ void imprimirShip(Ship ship){
 	printf("\n");
 }
 
-void cargarArregloShip(Ship* arreglo,int lancha, int submarino,int crucero,int destructor,int portaviones, int* id){
+void cargarArregloShip(Ship* arreglo,int lancha, int submarino,int crucero,int destructor,int portaviones){
 	int i,posicion;
 	posicion=0;
 	i=0;
 	while(i<lancha){
-		cargarShip(&arreglo[i],'L',id);
+		cargarShip(&arreglo[i],'L');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<submarino){
-		cargarShip(&arreglo[i],'S',id);
+		cargarShip(&arreglo[i],'S');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<crucero){
-		cargarShip(&arreglo[i],'C',id);
+		cargarShip(&arreglo[i],'C');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<destructor){
-		cargarShip(&arreglo[i],'D',id);
+		cargarShip(&arreglo[i],'D');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<portaviones){
-		cargarShip(&arreglo[i],'P',id);
+		cargarShip(&arreglo[i],'P');
 		i++;
 		posicion++;
 	}
@@ -164,8 +163,8 @@ void cargarArregloShip(Ship* arreglo,int lancha, int submarino,int crucero,int d
 }
 
 //mias!!:
-void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones,int* id){
-	
+void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones){
+
 	params->cuadros_minimos = (lancha*2)+(submarino*4)+(crucero*9)+(destructor*16)+(portaviones*25);
 	params->cuadros_ship=(lancha*1)+(submarino*2)+(crucero*3)+(destructor*4)+(portaviones*5);
 	params->cantidad_ship=lancha+submarino+crucero+destructor+portaviones;
@@ -178,39 +177,40 @@ void  cargarParams(Params* params,int lancha, int submarino,int crucero,int dest
 	posicion=0;
 	i=0;
 	while(i<lancha){
-		cargarShip(&params->arreglo_ship_cpu[posicion],'L',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'L');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<submarino){
-		cargarShip(&params->arreglo_ship_cpu[posicion],'S',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'S');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<crucero){
-		cargarShip(&params->arreglo_ship_cpu[posicion],'C',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'C');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<destructor){
-		cargarShip(&params->arreglo_ship_cpu[posicion],'D',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'D');
 		i++;
 		posicion++;
 	}
 	i=0;
 	while(i<portaviones){
-		cargarShip(&params->arreglo_ship_cpu[posicion],'P',id);
+		cargarShip(&params->arreglo_ship_cpu[posicion],'P');
 		i++;
 		posicion++;
 	}
-	
+
 	/*for (i=0;i<params->cantidad_ship;i++){
 		imprimirShip(params->arreglo_ship_cpu[i]);
 	}*/
 }
+
 void liberarParams(Params* params){
 	free(params->arreglo_ship_cpu);
 	free(params->arreglo_ship_player);
@@ -223,7 +223,7 @@ void positionRandomShip(Ship* ship,int fila,int columna){
 		if (orientacionRand==0){
 			/*printf("fil 0 : %d\n",(fila/2)-1-ship->tamano );
 			printf("col 0 : %d\n",columna-1);*/
-					
+
 			filaRand=intRandom(0,(fila/2)-ship->tamano);
 			columnaRand=intRandom(0,columna-1);
 		}
@@ -232,15 +232,15 @@ void positionRandomShip(Ship* ship,int fila,int columna){
 			printf("col 1 : %d\n",columna-ship->tamano-1);*/
 			filaRand=intRandom(0,(fila/2)-1);
 			columnaRand=intRandom(0,columna-ship->tamano);
-			
+
 		}
 		//printf("Estoy aqui rand\n");
-		
+
 		/*printf("oientacion: %d\n",orientacionRand );
 		printf("filaRand: %d\n",filaRand );
 		printf("columnaRand: %d\n",columnaRand);
 		printf("\n");*/
-		
+
 	}
 	else{
 		if (ship->tamano>columna){
@@ -255,11 +255,11 @@ void positionRandomShip(Ship* ship,int fila,int columna){
 		}
 	}
 
-	
+
 	putPositionToShip(ship,filaRand,columnaRand,orientacionRand);
 }
 int verificarArregloPositionShipCpu(Ship* arreglo,int largo,int posicion){ //retorna 1 si se sobrepone en alguno y 0 si no se sobrepone
-	int i;																					
+	int i;
 	for (i=0;i<largo;i++){
 		if(i!=posicion){
 			if(sobreponeShip(arreglo[i],arreglo[posicion])){
@@ -271,12 +271,12 @@ int verificarArregloPositionShipCpu(Ship* arreglo,int largo,int posicion){ //ret
 			}
 
 		}
-		
+
 	}
 	return 0;
 }
 int verificarArregloPositionShipPlayer(Ship* arreglo,int largo,Ship ship){ //retorna 1 si se sobrepone en alguno y 0 si no se sobrepone
-	int i;																					
+	int i;
 	for (i=0;i<largo;i++){
 
 			if(sobreponeShip(arreglo[i],ship)){
@@ -287,8 +287,8 @@ int verificarArregloPositionShipPlayer(Ship* arreglo,int largo,Ship ship){ //ret
 			return 1;
 			}
 
-		
-		
+
+
 	}
 	return 0;
 }
@@ -309,7 +309,7 @@ char** crearMatriz(int n,int m){
 	for (i=0;i<n;i++){
 		matriz[i]=(char*)malloc(sizeof(char)*m); //columnas
 	}
-	
+
 	for (i=0;i<n;i++){
 		for (j=0;j<m;j++){
 			matriz[i][j]='#';
@@ -329,7 +329,7 @@ void ponerShipCPU(Board* board){
 
 Board* createBoard(int n,int m, Params params,code *statusCode){
 	if ((n%2)!=0){ //verificando que el numero de filas es un numero par:
-		//printf("n no es par\n");		
+		//printf("n no es par\n");
 		return NULL;
 	}
 	//printf("cuadros_minimos dentro de inicializar: %d \n",params.cuadros_minimos);
@@ -353,6 +353,7 @@ Board* createBoard(int n,int m, Params params,code *statusCode){
 		board->fila=n;
 		board->columna=m;
 		board->params=params;
+		board->actualPlayer=1;
 		//board->params.arreglo_ship_cpu=params.arreglo_ship_cpu;
 		//board->params.arreglo_ship_player=params.arreglo_ship_player;
 		//imprimirShip(board->params.arreglo_ship_cpu[3]);
@@ -361,11 +362,11 @@ Board* createBoard(int n,int m, Params params,code *statusCode){
 		board->matriz1=(char**)crearMatriz(n,m);
 		//printf("termino inicializar board\n");
 		//poniendo los barcos creados
-		int i,j,k,l;
+		int i;
 		for (i=0;i<board->params.cantidad_ship;i++){
 			//printf("estoy aqui!\n");
 			positionRandomShip(&board->params.arreglo_ship_cpu[i],board->fila,board->columna);
-		
+
 			while(verificarArregloPositionShipCpu(board->params.arreglo_ship_cpu,board->params.cantidad_ship,i)){
 				positionRandomShip(&board->params.arreglo_ship_cpu[i],board->fila,board->columna);
 				//printf("estoy dentro del while\n");
@@ -376,7 +377,7 @@ Board* createBoard(int n,int m, Params params,code *statusCode){
 		printf("\nTablero creado\n");
 		return board;
 	}
-} 
+}
 void liberarBoard(Board* board){
 	int i;
 	for (i=0;i<board->fila;i++){
@@ -389,44 +390,220 @@ void liberarBoard(Board* board){
 	//printf("liberarBoar: OK\n");
 }
 
-void saveBoar(Board* board, int *id, code*statusCode){
+void saveBoard(Board* board, int *id, code*statusCode){
 	FILE *fp;
-   	int c;
-  
-   fp = fopen("file.txt","w");
-   if(fp == NULL) 
+   	int i;
+   	char valor[6];
+   	char registro[255];
+   	char hora[10];
+    char nombre_archivo[30];
+    char fecha[13];
+    char fecha_hora[32];
+    char aaaa[5];
+    time_t ltime;
+    struct tm *time_tm;
+    //char idNueva[20];
+    int idNuevaInt;
+
+
+
+    time(&ltime);
+    time_tm=localtime(&ltime);
+    sprintf(aaaa,"%d",1900+time_tm->tm_year);
+    sprintf(fecha,"%02d-%02d-%s",time_tm->tm_mday,time_tm->tm_mon+1,aaaa);
+    //hora:
+
+
+     sprintf(hora,"%02d:%02d:%02d",time_tm->tm_hour,time_tm->tm_min,time_tm->tm_sec);
+     idNuevaInt=(time_tm->tm_hour*time_tm->tm_hour)+(time_tm->tm_min*time_tm->tm_sec)+(time_tm->tm_sec*time_tm->tm_sec)+19+3+1997; //fecha de cumpleaños :D
+     //sprintf(idNueva,"%04d",idNuevaInt);
+     //idNuevaInt=atoi(idNueva);
+     *id=idNuevaInt;
+     //printf("ID dentro save:%d \n", *id);
+
+     //printf("idNueva: %s\n",idNueva );
+     sprintf(nombre_archivo,"Board%d.txt",idNuevaInt);
+     //printf("nombre_archivo%s\n",nombre_archivo );
+     //printf("nombre_archivo: %s\n",nombre_archivo );
+
+    //fecha
+
+    //fecha_hora
+    sprintf(fecha_hora,"00/%s %s\n",fecha,hora);
+
+
+
+   fp = fopen(nombre_archivo,"w");
+   if(fp == NULL)
    {
       perror("Error in opening file");
+      //errror al cargar
+   }
+   fputs(fecha_hora,fp);
+   RegDimension rd;
+   rd.f1='/';
+   rd.f2='/';
+   rd.f3='/';
+   rd.f4='/';
+   rd.f5='/';
+   memset(valor,0,sizeof(valor));
+
+   memcpy(rd.tipoReg,"01",2);
+   sprintf(valor,"%04d",board->fila);
+   memcpy(rd.fila,valor,4);
+
+   sprintf(valor,"%04d",board->columna);
+   memcpy(rd.columna,valor,4);
+   sprintf(valor,"%03d",board->params.cantidad_ship);
+   memcpy(rd.cantidad_ship,valor,3);
+   sprintf(valor,"%04d",board->params.cuadros_ship);
+   memcpy(rd.cuadros_ship,valor,4);
+   sprintf(valor,"%05d",board->params.cuadros_minimos);
+   memcpy(rd.cuadros_minimos,valor,5);
+
+
+   memset(registro,0,sizeof(registro)); //tiene que se 0 !! no sirve el "\0"
+   memcpy(registro,&rd,sizeof(RegDimension));
+   strcat(registro,"\n");
+   fputs(registro,fp);
+
+   RegShip rs;
+   rs.f1='/';
+   rs.f2='/';
+   rs.f3='/';
+   rs.f4='/';
+   memcpy(rs.tipoReg,"02",2);
+   int largo;
+   largo=board->params.cantidad_ship;
+   for (i=0;i<largo;i++){
+   		sprintf(valor,"%04d",board->params.arreglo_ship_cpu[i].posiciones[0].fila);
+   		memcpy(rs.fila,valor,4);
+
+   		sprintf(valor,"%04d",board->params.arreglo_ship_cpu[i].posiciones[0].columna);
+   		memcpy(rs.columna,valor,4);
+   		rs.tipo=board->params.arreglo_ship_cpu[i].tipo;
+   		sprintf(valor,"%d",board->params.arreglo_ship_cpu[i].orientacion);
+   		rs.orientacion=valor[0];
+
+   		memset(registro,0,sizeof(registro));
+		memcpy(registro,&rs,sizeof(RegShip));
+		strcat(registro,"\n");
+		fputs(registro,fp);
+
 
    }
 
-   
-  
+
+
+
    fclose(fp);
 
 	//FILE* archivo=fopen("Tableros/tablero.txt","w");
 }
 
 Board* loadBoard(int id, code*statusCode){
-
+	//printf("hola\n");
 	FILE *fp;
-   	int c;
-  
-   fp = fopen("file.txt","r");
-   if(fp == NULL) 
+	char buffer[255];
+	RegDimension rd;
+	RegShip rs;
+	int fila,columna,orientacion,filaBoard,columnaBoard;
+	char tipo_ship;
+	Params params;
+	Board * board;
+	char tipo[3];
+	char valor[6];
+	char nombre_archivo[30];
+	//printf("ID dentr load: %d\n",id );
+
+	memset(tipo,0,sizeof(tipo));
+	memset(valor,0,sizeof(valor));
+	sprintf(nombre_archivo,"Board%d.txt",id);
+	printf("nombre_archivo: %s\n",nombre_archivo );
+   fp = fopen(nombre_archivo,"r");
+   if(fp == NULL)
    {
       perror("Error in opening file");
    }
-   
-   while(1)
-   {
-      c = fgetc(fp);
-      if( feof(fp) )
-      { 
-         break ;
-      }
-      printf("%c", c);
-   }
+
+   while (!feof(fp)){
+		fgets(buffer,255,fp);
+		memcpy(tipo,buffer,2);
+		//printf("tipo string : %s\n",tipo );
+
+		if (atoi(tipo)==1){
+			memcpy(&rd,buffer,sizeof(RegDimension));
+			break;
+		}
+	}
+
+	memcpy(valor,rd.cantidad_ship,sizeof(rd.cantidad_ship));
+	params.cantidad_ship=atoi(valor);
+	memcpy(valor,rd.fila,sizeof(rd.fila));
+	filaBoard=atoi(valor);
+	memcpy(valor,rd.columna,sizeof(rd.columna));
+	columnaBoard=atoi(valor);
+	memcpy(valor,rd.cuadros_ship,sizeof(rd.cuadros_ship));
+	params.cuadros_ship=atoi(valor);
+	memcpy(valor,rd.cuadros_minimos,sizeof(rd.cuadros_minimos));
+	params.cuadros_minimos=atoi(valor);
+
+	params.arreglo_ship_cpu=(Ship*)malloc(sizeof(Ship)*(params.cantidad_ship));
+	params.arreglo_ship_player=(Ship*)malloc(sizeof(Ship)*(params.cuadros_ship+1));
+	params.largo_arreglo_player=0;
+	
+
+	memset(tipo,0,sizeof(tipo));
+	int contador=0;
+	Ship ship;
+	while (!feof(fp)){
+		fgets(buffer,255,fp);
+		memcpy(tipo,buffer,2);
+		if (atoi(tipo)==2){
+			
+			memset(valor,0,sizeof(valor));
+
+			memcpy(&rs,buffer,sizeof(RegShip));
+
+			tipo_ship=rs.tipo;
+			//printf("%c\n",tipo_ship );
+			memcpy(valor,&rs.orientacion,sizeof(rs.orientacion));
+			orientacion=atoi(valor);
+			//printf("orientacion: %d\n", orientacion );
+			memcpy(valor,rs.fila,sizeof(rs.fila));
+			fila=atoi(valor);
+			memcpy(valor,rs.columna,sizeof(rs.columna));
+			columna=atoi(valor);
+			//printf(" %d,%d\n",fila,columna );
+			cargarShip(&ship,tipo_ship);
+			putPositionToShip(&ship,fila,columna,orientacion);
+			//imprimirShip(ship);
+			params.arreglo_ship_cpu[contador]=ship;
+			contador++;
+
+		}
+	}
+	board=(Board*) malloc(sizeof(Board)); //verificando si hay memoria para el board
+	if (board==NULL){
+		return NULL;
+	}
+
+	else{
+		printf("Cargando tablero...");
+		board->fila=filaBoard;
+		board->columna=columnaBoard;
+		board->params=params;
+		board->actualPlayer=1;
+		board->matriz0=(char**)crearMatriz(filaBoard,columnaBoard);
+		board->matriz1=(char**)crearMatriz(filaBoard,columnaBoard);
+		ponerShipCPU(board);
+		printf("\nTablero cargado\n");
+
+		return board;
+	}
+
+
+
    fclose(fp);
 
 }
@@ -455,14 +632,63 @@ int checkBoard(Board* board, code* statusCode){
 }
 
 int play(Board* board,Ship* ship, Position* pArray, code* statusCode){
-	printf("funciones play para el board\n");
+	int fila=pArray[0].fila;
+	int columna=pArray[0].columna;
+	if (board->matriz0[fila][columna]=='#'){
+		board->matriz0[fila][columna]='X';
+		board->matriz1[fila][columna]='X';
+		int i,j;
+		int ships=board->params.cantidad_ship;
+		int tamano;
+		//printf("hola cpu\n");
+		for(i=0;i<ships;i++){
+			tamano=board->params.arreglo_ship_cpu[i].tamano;
+			for (j=0;j<tamano;j++){
+				if(compararPosition(board->params.arreglo_ship_cpu[i].posiciones[j],pArray[0])){
+					if(board->params.arreglo_ship_cpu[i].vida>=0){
+						board->params.arreglo_ship_cpu[i].vida-=1;
+						if(board->params.arreglo_ship_cpu[i].vida==0){
+							return 2;
+						}
+						return 1;
+					}
+
+				}
+			}
+		}
+		//printf("hola player\n");
+		ships=board->params.largo_arreglo_player;
+		for(i=0;i<ships;i++){
+			tamano=board->params.arreglo_ship_player[i].tamano;
+			for (j=0;tamano;j++){
+				if(compararPosition(board->params.arreglo_ship_cpu[i].posiciones[j],pArray[0])){
+					if(board->params.arreglo_ship_cpu[i].vida>=0){
+						board->params.arreglo_ship_cpu[i].vida-=1;
+						if(board->params.arreglo_ship_cpu[i].vida==0){
+							return 2;
+						}
+						return 1;
+					}
+
+				}
+			}
+		}
+		printf("casi final\n");
+		board->matriz0[fila][columna]='M';
+		board->matriz1[fila][columna]='M';
+		printf("final\n");
+		return 0;
+	}
+
+
+
 
 }
 
 
 void putShip(Board* board,Position position,Ship ship,code* statusCode){
 
-	int i;	
+	int i;
 	int fila,columna;
 
 	for (i=0;i<ship.tamano;i++){
@@ -475,7 +701,7 @@ void putShip(Board* board,Position position,Ship ship,code* statusCode){
 
 	}
 	int largo= board->params.largo_arreglo_player;
-	board->params.arreglo_ship_player[largo]=ship;	
+	board->params.arreglo_ship_player[largo]=ship;
 	board->params.largo_arreglo_player++;
 
 
@@ -484,7 +710,9 @@ void putShip(Board* board,Position position,Ship ship,code* statusCode){
 void printEnemigo(Board* board,int showComplete){
 	int i,j;
 	for (i=0;i<(board->fila)/2;i++){
+		printf("\t\t");
 		for (j=0;j<board->columna;j++){
+
 			if (showComplete==0){
 				printf("%c",board->matriz0[i][j] );
 			}
@@ -499,6 +727,7 @@ void printPlayer(Board* board){
 	int i,j;
 	//printf("fila:%d \n",(board->fila));
 	for (i=(board->fila)/2;i<(board->fila);i++){
+		printf("\t\t");
 		for (j=0;j<board->columna;j++){
 			printf("%c",board->matriz1[i][j] );
 		}
@@ -508,27 +737,28 @@ void printPlayer(Board* board){
 
 void print(Board* board,int showComplete,code* statusCode){
 	//printf("funciones print para el board\n");
-	printf("TABLERO ENEMIGO\n");
+	printf("\t\tTABLERO ENEMIGO\n");
 	if (showComplete==0){
 		printEnemigo(board,showComplete);
 	}
 	else if( showComplete==1){
 		printEnemigo(board,showComplete);
 	}
-	
+
 	int i;
+	printf("\t\t");
 	for (i=0;i<board->columna;i++){
 		printf("%c",'-');
 	}
 	printf("\n");
 	printPlayer(board);
-	printf("TABLERO JUGADOR\n");
+	printf("\t\tTABLERO JUGADOR\n");
 
 }
 
 void imprimirTitulo(){
 	printf(" ____            _     _     _                _       _        \n");
-	printf("| __ )    __ _  | |_  | |_  | |   ___   ___  | |__   (_)  _ __  \n");	
+	printf("| __ )    __ _  | |_  | |_  | |   ___   ___  | |__   (_)  _ __  \n");
 	printf("|  _ \\   / _` | | __| | __| | |  / _ \\ / __| | '_ \\  | | | '_ \\ \n");
 	printf("| |_) | | (_| | | |_  | |_  | | |  __/ \\__ \\ | | | | | | | |_) |\n");
 	printf("|____/   \\__,_|  \\__|  \\__| |_|  \\___| |___/ |_| |_| |_| | .__/ \n");
@@ -560,7 +790,7 @@ int verificarLetraShip(char tipo){ //verifica si el char tipo es una de las letr
 		tipo=='C' || tipo=='c'||
 		tipo=='D' || tipo=='d'||
 		tipo=='P' || tipo=='p'){
-		return 1;	
+		return 1;
 	}
 	else {
 		return 0;
@@ -569,9 +799,53 @@ int verificarLetraShip(char tipo){ //verifica si el char tipo es una de las letr
 int verificarPositionPlayer(Board* board,Position position){
 	if((position.fila>=0) && (position.fila<=(board->fila/2-1))
 		&& (position.columna>=0) && (position.columna<=board->columna-1)){
-		return 1;		
+		return 1;
 	}
 	else {
 		return 0;
 	}
 }
+int verificarGanador(Board* b){ // 0->CPU ; 1->Player ; 2->No hay ganador ; 3 error
+	int i,j;
+	if(b->actualPlayer==0){ //verificar computadora
+		for (i=0;i<(b->fila)/2;i++){
+			for (j=0;j<b->columna;j++){
+				if (verificarLetraShip(b->matriz0[i][j])){
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
+	else if(b->actualPlayer==1){
+		for (i=(b->fila)/2;i<(b->fila);i++){
+			for (j=0;j<b->columna;j++){
+				if (verificarLetraShip(b->matriz0[i][j])){
+					return 2;
+				}
+			}
+		}
+		return 1;
+	}
+	return 3;
+}
+void terminarTurno(Board* b){
+	if(b->actualPlayer==0){
+		b->actualPlayer=1;
+	}
+	else{
+		b->actualPlayer=0;
+	}
+
+}
+int batalla(Board* board){
+
+	while((verificarGanador(board))==2){
+		int fila,columna;
+		if(board->actualPlayer==0){
+			//fila
+		}
+	}
+
+}
+

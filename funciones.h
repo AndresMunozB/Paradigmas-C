@@ -15,10 +15,10 @@ void imprimirPosition(Position position);
 int compararPosition(Position position1,Position position2);
 void putPositionToShip(Ship* ship,int fila, int columna, int orientacion);
 int sobreponeShip(Ship ship1, Ship ship2);
-void cargarShip(Ship* ship,char tipo,int* id);
+void cargarShip(Ship* ship,char tipo);
 void imprimirShip(Ship ship);
 Ship* crearArregloShip(int cantidad_ship);
-void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones,int* id);
+void  cargarParams(Params* params,int lancha, int submarino,int crucero,int destructor,int portaviones);
 void imprimirParams(Params params);
 Board* inicializarBoard(int n,int m, Params params,code *statusCode);
 void liberarBoard(Board* board);
@@ -27,7 +27,7 @@ void liberarBoard(Board* board);
 
 //minimas pedidas:
 Board* createBoard(int n,int m, Params params,code *statusCode); 
-void saveBoar(Board* board, int *id, code*statusCode);
+void saveBoard(Board* board, int *id, code*statusCode);
 Board* loadBoard(int id, code*statusCode);
 int checkBoard(Board* board, code* statusCode);
 int play(Board* board,Ship* ship, Position* pArray, code* statusCode);
