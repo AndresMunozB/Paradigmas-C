@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "estructuras.h"
 #include "constantes.h"
 #include "funciones.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
@@ -546,6 +546,7 @@ Board* loadBoard(int id, code*statusCode){
 	params.cuadros_ship=atoi(valor);
 	memcpy(valor,rd.cuadros_minimos,sizeof(rd.cuadros_minimos));
 	params.cuadros_minimos=atoi(valor);
+	params.cuadros_por_ocupar=params.cuadros_ship;
 
 	params.arreglo_ship_cpu=(Ship*)malloc(sizeof(Ship)*(params.cantidad_ship));
 	params.arreglo_ship_player=(Ship*)malloc(sizeof(Ship)*(params.cuadros_ship+1));
@@ -655,8 +656,8 @@ int play(Board* board,Ship* ship, Position* pArray, code* statusCode){
 						if(board->params.arreglo_ship_cpu[i].vida==0){
 							return 2;
 						}
-						return 1;
 					}
+					return 1;
 
 				}
 			}
@@ -669,11 +670,11 @@ int play(Board* board,Ship* ship, Position* pArray, code* statusCode){
 				if(compararPosition(board->params.arreglo_ship_cpu[i].posiciones[j],pArray[0])){
 					if(board->params.arreglo_ship_cpu[i].vida>=0){
 						board->params.arreglo_ship_cpu[i].vida-=1;
-						if(board->params.arreglo_ship_cpu[i].vida==0){
+						if(board->params.arreglo_ship_cpu[i].vida<=0){
 							return 2;
 						}
-						return 1;
 					}
+					return 1;
 
 				}
 			}

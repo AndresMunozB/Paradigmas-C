@@ -24,6 +24,7 @@ int main(){
 			int l,s,c,d,p;
 			int fila,columna;
 			int cuadros_minimos;
+			
 			do{
 
 				printf("Ingrese la cantidad de cada tipo de barco: \n");
