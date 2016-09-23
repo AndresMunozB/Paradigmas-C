@@ -71,9 +71,17 @@ int main(){
 			system("pause");
 		}
 		else if(menu==2){
+			saveBoard(board,&id,statusCode);
+			printf("Tablero guardado, id : %d\n\n",id);
 
 		}
 		else if(menu==3){
+			int idBoard;
+			printf("Ingrese el id del tablero: ");
+			scanf("%d",&idBoard);
+
+			board=loadBoard(idBoard,statusCode);
+
 
 		}
 		else if(menu==4){
@@ -239,14 +247,14 @@ int main(){
 		else if (menu==7){
 			int opcion;
 			printf("Mostrar los barcos enemigos?...\n");
-			printf("0) No\n");
-			printf("1) Si\n");
+			printf("1) No\n");
+			printf("2) Si\n");
 			printf("Opcion: ");
 			scanf("%d",&opcion);
-			if(opcion==0){
+			if(opcion==1){
 				print(board,0,statusCode);
 			}
-			else if(opcion==1){
+			else if(opcion==2){
 				print(board,1,statusCode);
 			}
 			system("pause");
@@ -256,13 +264,13 @@ int main(){
 	//printf("jugador: %d\n",board->actualPlayer );
 	//terminarTurno(board);
 	//printf("jugador: %d\n",board->actualPlayer );
-	print(board,1,statusCode);
-	saveBoard(board,&id,statusCode);
+	//print(board,1,statusCode);
+	
 
 	
 	//print(board,0,statusCode);
-	loadBoard(id,statusCode);
-	print(board,1,statusCode);
+	
+	//print(board,1,statusCode);
 	if (board!=NULL){
 		liberarBoard(board);
 		liberarParams(&params);

@@ -422,7 +422,7 @@ void saveBoard(Board* board, int *id, code*statusCode){
      //printf("ID dentro save:%d \n", *id);
 
      //printf("idNueva: %s\n",idNueva );
-     sprintf(nombre_archivo,"Board%d.txt",idNuevaInt);
+     sprintf(nombre_archivo,"Board/Board%d.txt",idNuevaInt);
      //printf("nombre_archivo%s\n",nombre_archivo );
      //printf("nombre_archivo: %s\n",nombre_archivo );
 
@@ -510,7 +510,7 @@ Board* loadBoard(int id, code*statusCode){
 	int fila,columna,orientacion,filaBoard,columnaBoard;
 	char tipo_ship;
 	Params params;
-	Board * board;
+	
 	char tipo[3];
 	char valor[6];
 	char nombre_archivo[30];
@@ -518,7 +518,7 @@ Board* loadBoard(int id, code*statusCode){
 
 	memset(tipo,0,sizeof(tipo));
 	memset(valor,0,sizeof(valor));
-	sprintf(nombre_archivo,"Board%d.txt",id);
+	sprintf(nombre_archivo,"Board/Board%d.txt",id);
 	printf("nombre_archivo: %s\n",nombre_archivo );
    fp = fopen(nombre_archivo,"r");
    if(fp == NULL)
@@ -583,23 +583,29 @@ Board* loadBoard(int id, code*statusCode){
 
 		}
 	}
-	board=(Board*) malloc(sizeof(Board)); //verificando si hay memoria para el board
-	if (board==NULL){
+	Board* b;
+	if (b==NULL){
+		printf("null1asd\n");
+		return NULL;
+	}
+	b=(Board*) malloc(sizeof(Board)); //verificando si hay memoria para el board
+	if (b==NULL){
+		printf("null\n");
 		return NULL;
 	}
 
 	else{
 		printf("Cargando tablero...");
-		board->fila=filaBoard;
-		board->columna=columnaBoard;
-		board->params=params;
-		board->actualPlayer=1;
-		board->matriz0=(char**)crearMatriz(filaBoard,columnaBoard);
-		board->matriz1=(char**)crearMatriz(filaBoard,columnaBoard);
-		ponerShipCPU(board);
+		b->fila=filaBoard;
+		b->columna=columnaBoard;
+		b->params=params;
+		b->actualPlayer=1;
+		b->matriz0=(char**)crearMatriz(filaBoard,columnaBoard);
+		b->matriz1=(char**)crearMatriz(filaBoard,columnaBoard);
+		ponerShipCPU(b);
 		printf("\nTablero cargado\n");
 
-		return board;
+		return b;
 	}
 
 
