@@ -72,8 +72,13 @@ int main(){
 			//system("pause");
 		}
 		else if(menu==2){
-			saveBoard(board,&id,statusCode);
-			printf("Tablero guardado, id : %d\n\n",id);
+			if (board!=NULL){
+				saveBoard(board,&id,statusCode);
+				printf("Tablero guardado, id : %d\n\n",id);
+			}
+			else{
+				printf("Debe crear o cargar un tablero previamente\n");
+			}
 
 		}
 		else if(menu==3){
@@ -86,42 +91,52 @@ int main(){
 
 		}
 		else if(menu==4){
-			printf("\n");
-			if (checkBoard(board,statusCode)){
-				printf("El tablero esta bien\n");
+			if (board!=NULL){
+				printf("\n");
+				if (checkBoard(board,statusCode)){
+					printf("El tablero esta bien\n");
+				}
+			}
+			else{
+				printf("Debe crear o cargar un tablero previamente\n");
 			}
 
 		}
 		else if(menu==5){
+			if (board!=NULL){
 
-			Position position;
-			do{
-						printf("Fila   : [0,%d]\n",(board->fila/2)-1 );
-						printf("Columna: [0,%d]\n",board->columna-1);
-						printf("Ingrese la posicion: \n");
-						printf("Fila: ");
-						fflush(stdin);
-						scanf("%d",&position.fila);
+				Position position;
+				do{
+							printf("Fila   : [0,%d]\n",(board->fila/2)-1 );
+							printf("Columna: [0,%d]\n",board->columna-1);
+							printf("Ingrese la posicion: \n");
+							printf("Fila: ");
+							fflush(stdin);
+							scanf("%d",&position.fila);
 
-						printf("Columna: ");
-	 					fflush(stdin);
-						scanf("%d",&position.columna);
-						if(!verificarPositionPlayer(board,position)){
-							printf("Posicion fuera de la matriz\n");
-						}
-					}while(!(verificarPositionPlayer(board,position)) );
+							printf("Columna: ");
+		 					fflush(stdin);
+							scanf("%d",&position.columna);
+							if(!verificarPositionPlayer(board,position)){
+								printf("Posicion fuera de la matriz\n");
+							}
+						}while(!(verificarPositionPlayer(board,position)) );
 
 
 
-			int valor=play(board,&board->params.arreglo_ship_cpu[0],&position,statusCode);
-			if (valor ==2){
-				printf("Haz destruido un barco\n");
+				int valor=play(board,&board->params.arreglo_ship_cpu[0],&position,statusCode);
+				if (valor ==2){
+					printf("Haz destruido un barco\n");
+				}
+				else if(valor==1){
+					printf("Haz dado en una parte de un barco\n");
+				}
+				else if (valor ==0){
+					printf("Haz fallado el disparo\n");
+				}
 			}
-			else if(valor==1){
-				printf("Haz dado en una parte de un barco\n");
-			}
-			else if (valor ==0){
-				printf("Haz fallado el disparo\n");
+			else{
+				printf("Debe crear o cargar un tablero previamente\n");
 			}
 
 
@@ -262,21 +277,26 @@ int main(){
 				//system("pause");
 			}
 			else{
-				printf("Tiene que ingresar un tablero primero\n");
+				printf("Debe crear o cargar un tablero previamente\n");
 			}
 		}
 		else if (menu==7){
-			int opcion;
-			printf("Mostrar los barcos enemigos?...\n");
-			printf("1) No\n");
-			printf("2) Si\n");
-			printf("Opcion: ");
-			scanf("%d",&opcion);
-			if(opcion==1){
-				print(board,0,statusCode);
+			if (board!=NULL){
+				int opcion;
+				printf("Mostrar los barcos enemigos?...\n");
+				printf("1) No\n");
+				printf("2) Si\n");
+				printf("Opcion: ");
+				scanf("%d",&opcion);
+				if(opcion==1){
+					print(board,0,statusCode);
+				}
+				else if(opcion==2){
+					print(board,1,statusCode);
+				}
 			}
-			else if(opcion==2){
-				print(board,1,statusCode);
+			else{
+				printf("Debe crear o cargar un tablero previamente\n");
 			}
 			//system("pause");
 		}
