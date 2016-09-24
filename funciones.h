@@ -1,5 +1,9 @@
 #include "constantes.h"
 #include "estructuras.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
 #ifndef _FUNCIONES_H
 #define _FUNCIONES_H

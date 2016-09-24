@@ -12,10 +12,7 @@ typedef struct{
 
 // Ship:
 typedef struct{
-	/*Armamento: teledirigido, onda expansiva, revelacion de terreno etc
-	  resistencia
-	  blindaje
-	  tamaño de la embarcacion (cuantos cuadritos ocupa)*/
+
 	  char tipo; //lancha, submarino, crucero , destructor, portaviones; L,S,C,D,P
 	  int vida; // 1, 2, 3, 4, 5. esto ademas nos sirve para saber cuanto espacio ocupa en el tablero.
 	  int orientacion; /// 0 o 1 ; vertical y horizontal.
@@ -26,9 +23,6 @@ typedef struct{
 
 
 typedef struct{
-	/*cantidad de cada tipo de barco en solo una mitad
-	calamares gigantes, tormentas, etc
-	*/
 
 	int cuadros_minimos;
 	int cuadros_ship; 
@@ -37,18 +31,13 @@ typedef struct{
 	int cuadros_por_ocupar;
 	Ship* arreglo_ship_cpu;
 	Ship* arreglo_ship_player;
-	
-	
-
-	//Ship*
 
 }Params;
 
 
 //Board:
 typedef struct{
-	/*dimenciones de nxm donde n debe ser par!! 
-	dificultad :*/
+
 	int fila;
 	int columna;
 	int dificultad;
@@ -56,8 +45,7 @@ typedef struct{
 	char** matriz0;
 	char** matriz1;
 	int actualPlayer;
-
-
+	
 }Board;
 
 

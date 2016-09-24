@@ -1,9 +1,9 @@
+#include "constantes.h"
+#include "estructuras.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "estructuras.h"
-#include "funciones.h"
-#include <string.h>
 #include <time.h>
+#include <string.h>
 
 
 int main(){
@@ -24,7 +24,7 @@ int main(){
 			int l,s,c,d,p;
 			int fila,columna;
 			int cuadros_minimos;
-			
+
 			do{
 
 				printf("Ingrese la cantidad de cada tipo de barco: \n");
@@ -81,7 +81,7 @@ int main(){
 			printf("Ingrese el id del tablero: ");
 			scanf("%d",&idBoard);
 			printf("hola\n");
-			board=loadBoard(idBoard,statusCode);
+			board=(Board*)loadBoard(idBoard,statusCode);
 			printf("hola\n");
 
 		}
@@ -93,17 +93,37 @@ int main(){
 
 		}
 		else if(menu==5){
-			int fila,columna;
-			do{
-				printf("Ingrese la posicion a atacar\n");
-			}while(0);
+
 			Position position;
-			cargarPosition(&position,3,2);
+			do{
+						printf("Fila   : [0,%d]\n",(board->fila/2)-1 );
+						printf("Columna: [0,%d]\n",board->columna-1);
+						printf("Ingrese la posicion: \n");
+						printf("Fila: ");
+						fflush(stdin);
+						scanf("%d",&position.fila);
+
+						printf("Columna: ");
+	 					fflush(stdin);
+						scanf("%d",&position.columna);
+						if(!verificarPositionPlayer(board,position)){
+							printf("Posicion fuera de la matriz\n");
+						}
+					}while(!(verificarPositionPlayer(board,position)) );
 
 
-			printf("hola2\n");
-			play(board,&board->params.arreglo_ship_cpu[0],&position,statusCode);
-			printf("hola\n");
+
+			int valor=play(board,&board->params.arreglo_ship_cpu[0],&position,statusCode);
+			if (valor ==2){
+				printf("Haz destruido un barco\n");
+			}
+			else if(valor==1){
+				printf("Haz dado en una parte de un barco\n");
+			}
+			else if (valor ==0){
+				printf("Haz fallado el disparo\n");
+			}
+
 
 		}
 		else if(menu==6){

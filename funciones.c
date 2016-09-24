@@ -1,6 +1,5 @@
-#include "estructuras.h"
 #include "constantes.h"
-#include "funciones.h"
+#include "estructuras.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -363,16 +362,14 @@ Board* createBoard(int n,int m, Params params,code *statusCode){
 		//poniendo los barcos creados
 		int i;
 		for (i=0;i<board->params.cantidad_ship;i++){
-			//printf("estoy aqui!\n");
 			positionRandomShip(&board->params.arreglo_ship_cpu[i],board->fila,board->columna);
 
 			while(verificarArregloPositionShipCpu(board->params.arreglo_ship_cpu,board->params.cantidad_ship,i)){
 				positionRandomShip(&board->params.arreglo_ship_cpu[i],board->fila,board->columna);
-				//printf("estoy dentro del while\n");
 			}
-			//imprimirShip(board->params.arreglo_ship_cpu[i]);
 		}
 		ponerShipCPU(board);
+
 		printf("\nTablero creado\n");
 		return board;
 	}
@@ -461,7 +458,7 @@ void saveBoard(Board* board, int *id, code*statusCode){
    memcpy(rd.cuadros_minimos,valor,5);
 
 
-   memset(registro,0,sizeof(registro)); //tiene que se 0 !! no sirve el "\0"
+   memset(registro,0,sizeof(registro));
    memcpy(registro,&rd,sizeof(RegDimension));
    strcat(registro,"\n");
    fputs(registro,fp);
@@ -560,27 +557,19 @@ Board* loadBoard(int id, code*statusCode){
 		fgets(buffer,255,fp);
 		memcpy(tipo,buffer,2);
 		if (atoi(tipo)==2){
-			
 			memset(valor,0,sizeof(valor));
-
 			memcpy(&rs,buffer,sizeof(RegShip));
-
 			tipo_ship=rs.tipo;
-			//printf("%c\n",tipo_ship );
 			memcpy(valor,&rs.orientacion,sizeof(rs.orientacion));
 			orientacion=atoi(valor);
-			//printf("orientacion: %d\n", orientacion );
 			memcpy(valor,rs.fila,sizeof(rs.fila));
 			fila=atoi(valor);
 			memcpy(valor,rs.columna,sizeof(rs.columna));
 			columna=atoi(valor);
-			//printf(" %d,%d\n",fila,columna );
 			cargarShip(&ship,tipo_ship);
 			putPositionToShip(&ship,fila,columna,orientacion);
-			//imprimirShip(ship);
 			params.arreglo_ship_cpu[contador]=ship;
 			contador++;
-
 		}
 	}
 	Board* b;
