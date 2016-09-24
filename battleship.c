@@ -17,7 +17,7 @@ int main(){
 	Board* board=NULL;
 
 	int menu=0;
-	while (menu!=10){
+	while (menu!=8){
 		imprimirMenu();
 		scanf("%d",&menu);
 		if(menu==1){
@@ -68,7 +68,7 @@ int main(){
 			cargarParams(&params,l,s,c,d,p);
 			board=(Board*)createBoard(fila,columna,params,statusCode);
 			printf("\n");
-			print(board,1,statusCode);
+			//print(board,1,statusCode);
 			//system("pause");
 		}
 		else if(menu==2){
@@ -110,7 +110,7 @@ int main(){
 							printf("Fila   : [0,%d]\n",(board->fila/2)-1 );
 							printf("Columna: [0,%d]\n",board->columna-1);
 							printf("Ingrese la posicion: \n");
-							printf("Fila: ");
+							printf("Fila   : ");
 							fflush(stdin);
 							scanf("%d",&position.fila);
 
@@ -217,7 +217,7 @@ int main(){
 						printf("Fila   : [0,%d]\n",(board->fila/2)-1 );
 						printf("Columna: [0,%d]\n",board->columna-1);
 						printf("Ingrese la posicion: \n");
-						printf("Fila: ");
+						printf("Fila   : ");
 						fflush(stdin);
 						scanf("%d",&position.fila);
 

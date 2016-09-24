@@ -36,7 +36,7 @@ int compararPosition(Position position1,Position position2){
 	}
 
 }
-void inicialiarArregloPosiciones(Position* posiciones){
+void inicializarArregloPosition(Position* posiciones){
 	int i;
 	for (i=0;i<5;i++){
 		posiciones[i].fila=-1;
@@ -75,7 +75,7 @@ int sobreponeShip(Ship ship1, Ship ship2){ //si se sobrepone el barco retorna 1,
 }
 void cargarShip(Ship* ship,char tipo){
 	ship->tipo=tipo;
-	inicialiarArregloPosiciones(ship->posiciones);
+	inicializarArregloPosition(ship->posiciones);
 
 	if(tipo=='L'){
 		ship->vida=1;
@@ -668,10 +668,10 @@ int play(Board* board,Ship* ship, Position* pArray, code* statusCode){
 				}
 			}
 		}
-		printf("casi final\n");
+		//printf("casi final\n");
 		board->matriz0[fila][columna]='M';
 		board->matriz1[fila][columna]='M';
-		printf("final\n");
+		//printf("final\n");
 		return 0;
 	}
 
@@ -761,14 +761,16 @@ void imprimirTitulo(){
 	printf("\n\n\n");
 }
 void imprimirMenu(){
-	printf("\t\tMENU\n\n");
-	printf("1) Crear tablero\n");
-	printf("2) Grabar tablero\n");
-	printf("3) Cargar tablero\n");
-	printf("4) Verificar tablero\n");
-	printf("5) Jugar\n");
-	printf("6) Posicionar embarcaciones\n");
-	printf("7) Visualizar tablero\n");
+	printf("\t\t\t\tMENU\n\n");
+	printf("\t\t1) Crear tablero\n");
+	printf("\t\t2) Grabar tablero\n");
+	printf("\t\t3) Cargar tablero\n");
+	printf("\t\t4) Verificar tablero\n");
+	printf("\t\t5) Jugar\n");
+	printf("\t\t6) Posicionar embarcaciones\n");
+	printf("\t\t7) Visualizar tablero\n");
+	printf("\t\t8) Salir\n");
+	printf("\t\t\nOpcion:");
 }
 void imprimirInfoShip(){
 	printf("Lancha      : L  --  Vida/Largo: 1\n");
@@ -800,6 +802,7 @@ int verificarPositionPlayer(Board* board,Position position){
 		return 0;
 	}
 }
+
 int verificarGanador(Board* b){ // 0->CPU ; 1->Player ; 2->No hay ganador ; 3 error
 	int i,j;
 	if(b->actualPlayer==0){ //verificar computadora
