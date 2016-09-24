@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#define sizeofBoard sizeof(Board)
 
 
 int intRandom(int desde,int hasta){
@@ -210,8 +211,11 @@ void  cargarParams(Params* params,int lancha, int submarino,int crucero,int dest
 }
 
 void liberarParams(Params* params){
+	printf("1\n");
 	free(params->arreglo_ship_cpu);
+	printf("2\n");
 	free(params->arreglo_ship_player);
+	printf("3\n");
 }
 void positionRandomShip(Ship* ship,int fila,int columna){
 	int orientacionRand,filaRand,columnaRand;
@@ -376,13 +380,19 @@ Board* createBoard(int n,int m, Params params,code *statusCode){
 }
 void liberarBoard(Board* board){
 	int i;
+	printf("4\n");
 	for (i=0;i<board->fila;i++){
+		printf("adsf: %d\n",i );
 		free(board->matriz0[i]);
 		free(board->matriz1[i]);
 	}
+	printf("5\n");
 	free(board->matriz0);
+	printf("6\n");
 	free(board->matriz0);
+	printf("7\n");
 	free(board);
+	printf("8\n");
 	//printf("liberarBoar: OK\n");
 }
 
@@ -519,7 +529,8 @@ Board* loadBoard(int id, code*statusCode){
    fp = fopen(nombre_archivo,"r");
    if(fp == NULL)
    {
-      perror("Error in opening file");
+      printf("archivo no existe\n");
+      return NULL;
    }
 
    while (!feof(fp)){
@@ -577,9 +588,10 @@ Board* loadBoard(int id, code*statusCode){
 		printf("null1asd\n");
 		return NULL;
 	}
-	b=(Board*) malloc(sizeof(Board)); //verificando si hay memoria para el board
+	b=(Board*) malloc(sizeofBoard); //verificando si hay memoria para el board
 	if (b==NULL){
-		printf("null\n");
+		printf("No se pudo cargar el archivo, error desconocido\n");
+
 		return NULL;
 	}
 
@@ -766,7 +778,7 @@ void imprimirMenu(){
 	printf("\t\t2) Grabar tablero\n");
 	printf("\t\t3) Cargar tablero\n");
 	printf("\t\t4) Verificar tablero\n");
-	printf("\t\t5) Jugar\n");
+	printf("\t\t5) Atacar\n");
 	printf("\t\t6) Posicionar embarcaciones\n");
 	printf("\t\t7) Visualizar tablero\n");
 	printf("\t\t8) Salir\n");

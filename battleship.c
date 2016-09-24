@@ -19,7 +19,9 @@ int main(){
 	int menu=0;
 	while (menu!=8){
 		imprimirMenu();
+		fflush(stdin);
 		scanf("%d",&menu);
+		//printf("%d \n",menu );
 		if(menu==1){
 			int l,s,c,d,p;
 			int fila,columna;
@@ -84,10 +86,11 @@ int main(){
 		else if(menu==3){
 			int idBoard;
 			printf("Ingrese el id del tablero: ");
+			fflush(stdin);
 			scanf("%d",&idBoard);
-			printf("hola\n");
+			//printf("hola\n");
 			board=(Board*)loadBoard(idBoard,statusCode);
-			printf("hola\n");
+			//printf("hola\n");
 
 		}
 		else if(menu==4){
@@ -313,8 +316,9 @@ int main(){
 	
 	//print(board,1,statusCode);
 	/*if (board!=NULL){
-		liberarBoard(board);
 		liberarParams(&params);
+		liberarBoard(board);
+		
 	}*/
 	
 
